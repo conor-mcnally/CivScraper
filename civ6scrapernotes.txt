@@ -1,0 +1,24 @@
+Land units
+wikitable sortable mw-collapsible mw-made-collapsible jquery-tablesorter
+
+Civilian units
+wikitable sortable mw-collapsible mw-made-collapsible jquery-tablesorter
+
+td = data cell
+
+table class = wikitable sortable mw-collapsible mw-made-collapsible jquery-tablesorter
+title = <unit name>
+class = "image" for each occuring image with title
+
+9 data cells per row/unit
+Unit Name & Icon = td within table class (name above) at index[0]
+Description at index [1]
+Melee at index [2]
+etc..
+Maintenance at index[8]
+
+See example1.py for how to put this together, code is nearly identical
+
+All above applies to gamepedia site
+Better to use fandom site, better tables less searching through pages
+Also only one table on fandom site much easier to use with example1.py
