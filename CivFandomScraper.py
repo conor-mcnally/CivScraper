@@ -6,7 +6,6 @@ import urllib.request
 
 #regex expression for html tags
 clean = re.compile('<.*?>')
-
 #Function to strip html tags from text
 def strip_html(list):
 	newList = []
@@ -26,21 +25,11 @@ list_of_leaders = soup.find('table', { 'class': 'wikitable sortable' })
 #Extract each leader row from table
 leader = list_of_leaders.find_all('tr')
 
-
 #This works - Finds only p tags in list of leaders
 #Retrives Leader ability & leader agenda, need to split by seperate p tags
 # p - finds descriptions for abiliy and agenda
 # b - names of agendas and abilities
 # a - SHOULD find name of leader(td[0]), where td[0] == leader, td[1] == civ, td[2] == ability, td[3] == agenda
-#-----------------------------------------------------------------------------------
-#LEADER ICONS - PICS OF THEIR FACE - Forget this for now and focus on names only
-# leader_icon = []
-# for tr in leader:
-# 	images = tr.find_all("img")
-# 	for image in images:
-# 		image_src = image["src"]
-# 		urllib.request.urlretrieve(image_src)
-
 
 #-----------------------------------------------------------------------------------
 #LEADER ABILITY/AGENDA TITLE
@@ -60,7 +49,6 @@ agenda_title = strip_html(agenda_title)
 
 #Show results
 print("Ability Title: \n", ability_title[1], "\nAgenda Title: \n", agenda_title[1])
-
 #------------------------------------------------------------------------------------
 #LEADER ABILITY/AGENDA TEXT
 #Extract leader ability/agenda text from table
@@ -79,23 +67,11 @@ agenda_text = strip_html(agenda_text)
 
 #Show results
 print("\nAbility Text: \n", ability_text[1], "\nAgenda Text: \n", agenda_text[1])
+#------------------------------------------------------------------------------------
+#Leader Name
 
 #------------------------------------------------------------------------------------
-#LEADER NAME
-# leader_name = []
-# for td in leader.find_all('td'):
-# 	leader_name.append(td.find_all("a"))
-# print(leader_name[2])
-
-# name = leader.find_all("td")[0].find_all("a")[1]
-# leader_name.append(name)
-#
-# leader_name.pop(0)
-# print(leader_name[5])
-
-
-
-
+#Leader Icon
 
 #------------------------------------------------------------------------------------
 #Final step, combine each corresponding element in leader name, leader icon, leader emblem, leader ability/agenda title & leader ability/agenda text
