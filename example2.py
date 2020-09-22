@@ -2,26 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 
 # get the data
-data = requests.get('http://10.0.0.10:1234/scrape.html')
+data = requests.get('https://civilization.fandom.com/wiki/Leaders_(Civ6)')
 
 # load data into bs4
 soup = BeautifulSoup(data.text, 'html.parser')
 
-# get data simply by looking for each tr
-data = []
-for tr in soup.find_all('tr'):
-	values = [td.text for td in tr.find_all('td')]
-	data.append(values)
+list_of_leaders = soup.find("table", {"class": "wikitable sortable"})
 
-# get data only where rows are marked as special
-data = []
-for tr in soup.find_all('tr', { 'class': 'special' }):
-	values = [td.text for td in tr.find_all('td')]
-	data.append(values)
+tbody = list_of_leaders.find('tbody')
 
-# get data within a specific element
-data = []
-div = soup.find('div', { 'class': 'special_table' })
-for tr in div.find_all('tr'):
-	values = [td.text for td in tr.find_all('td')]
-	data.append(values)
+for tr in tbody.find_all('tr'):
+	name = tr.find_all('td').find_all('a')
+print(name)

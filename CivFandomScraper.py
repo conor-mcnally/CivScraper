@@ -69,12 +69,19 @@ agenda_text = strip_html(agenda_text)
 print("\nAbility Text: \n", ability_text[1], "\nAgenda Text: \n", agenda_text[1])
 #------------------------------------------------------------------------------------
 #Leader Name
+leader_name = []
+for tr in leader:
+	leader_name.append(tr.find_all('a', {"class": "image"}))
+print(leader_name[2])
 
 #------------------------------------------------------------------------------------
 #Leader Icon
+leader_icon = []
+
 
 #------------------------------------------------------------------------------------
-#Final step, combine each corresponding element in leader name, leader icon, leader emblem, leader ability/agenda title & leader ability/agenda text
+#Final - Have Seperate lists to be used in embed/ or maybe save to JSON to search by name/key?
+#JSON Structure would be good, index is leader name then
 
 # for tr in list_of_leaders.find_all('tr'):
 # 	leader = tr.find_all('td')[1].text.strip()
