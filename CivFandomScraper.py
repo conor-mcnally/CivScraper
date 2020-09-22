@@ -24,6 +24,7 @@ soup = BeautifulSoup(data.text, 'html.parser')
 list_of_leaders = soup.find('table', { 'class': 'wikitable sortable' })
 #Extract each leader row from table
 leader = list_of_leaders.find_all('tr')
+#Pop out <th> before we begin to eliminate first empty row
 
 #This works - Finds only p tags in list of leaders
 #Retrives Leader ability & leader agenda, need to split by seperate p tags
@@ -69,14 +70,14 @@ agenda_text = strip_html(agenda_text)
 print("\nAbility Text: \n", ability_text[1], "\nAgenda Text: \n", agenda_text[1])
 #------------------------------------------------------------------------------------
 #Leader Name
-leader_name = []
-for tr in leader:
-	leader_name.append(tr.find_all('a', {"class": "image"}))
-print(leader_name[2])
+# leader_name = []
+# for tr in leader:
+# 	name = tr.find_all('td')[0].find_all('a')[1]
+# 	print(name)
 
 #------------------------------------------------------------------------------------
 #Leader Icon
-leader_icon = []
+# leader_icon = []
 
 
 #------------------------------------------------------------------------------------
