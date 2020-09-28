@@ -27,7 +27,6 @@ list_of_leaders = soup.find('table', { 'class': 'wikitable sortable' })
 leader = list_of_leaders.find_all('tr')
 #Remove first row containing table headings
 leader.pop(0)
-
 #-----------------------------------------------------------------------------------
 #leader ability/agenda titles
 leader_info_titles = []
@@ -76,14 +75,18 @@ name = list(dict.fromkeys(name))
 #print("Leader Name: \n", name[1], "\n")
 
 #------------------------------------------------------------------------------------
-#Leader Icon
-# leader_icon = []
-# for tr in leader:
-# 	for image in tr:
-# 		leader_icon.append(image.find_all('img')['src'])
-# print(len(leader_icon))
+# Leader Icon
+#YESSSS ALL LEADER ICONS - YESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+#YOU DA MAN
+leader_icon = []
+for tr in leader:
+	for td in tr.find_all("a")[0]:
+		for image in td:
+			leader_icon.append(image.get('src'))
+print(leader_icon[0])
 
 #------------------------------------------------------------------------------------
+#Combine Lists
 @dataclass
 class Leader:
 	ability_title : str
@@ -98,10 +101,13 @@ combined = {
 
 #Discord Help Attempt - dict comprehension
 #combined = {key : rest for (key, *rest) in zip(name, ability_title, ability_text, agenda_title, agenda_text)}
-print("\nAbility Title: \n", combined["Alexander"].ability_title)
-print("\nAbility Text: \n", combined["Alexander"].ability_text)
-print("\nAgenda Title: \n", combined["Alexander"].agenda_title)
-print("\nAgenda Text: \n", combined["Alexander"].agenda_text)
+
+#Show results
+# user_input = input("Enter leader name: ")
+# print("\nAbility Title: \n", combined[user_input].ability_title)
+# print("\nAbility Text: \n", combined[user_input].ability_text)
+# print("\nAgenda Title: \n", combined[user_input].agenda_title)
+# print("\nAgenda Text: \n", combined[user_input].agenda_text)
 
 #------------------------------------------------------------------------------------
 #Final - Have Seperate lists to be used in embed
