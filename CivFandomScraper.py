@@ -2,6 +2,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+from dataclasses import dataclass
 
 #regex expression for html tags
 clean = re.compile('<.*?>')
@@ -42,7 +43,7 @@ ability_title = strip_html(ability_title)
 agenda_title = strip_html(agenda_title)
 
 #Show results
-print("Ability Title: \n", ability_title[1], "\nAgenda Title: \n", agenda_title[1])
+#print("Ability Title: \n", ability_title[1], "\nAgenda Title: \n", agenda_title[1])
 #------------------------------------------------------------------------------------
 #leader ability/agenda text
 leader_info_text = []
@@ -58,7 +59,7 @@ ability_text = strip_html(ability_text)
 agenda_text = strip_html(agenda_text)
 
 #Show results
-print("\nAbility Text: \n", ability_text[1], "\nAgenda Text: \n", agenda_text[1])
+#print("\nAbility Text: \n", ability_text[1], "\nAgenda Text: \n", agenda_text[1])
 #------------------------------------------------------------------------------------
 #Leader Name
 name = []
@@ -72,7 +73,7 @@ name = strip_html(name)
 #Remove duplicates
 name = list(dict.fromkeys(name))
 
-print("Leader Name: \n", name[0:10])
+#print("Leader Name: \n", name[1], "\n")
 
 #------------------------------------------------------------------------------------
 #Leader Icon
@@ -83,12 +84,24 @@ print("Leader Name: \n", name[0:10])
 # print(len(leader_icon))
 
 #------------------------------------------------------------------------------------
-#Combine Agenda/Ability titles and text
-agenda_dict = dict(zip(agenda_title, agenda_text))
-#print(agenda_dict)
+@dataclass
+class Leader:
+	ability_title : str
+	ability_text : str
+	agenda_title : str
+	agenda_text : str
 
-ability_dict = dict(zip(ability_title, ability_text))
-#print(ability_dict)
+combined = {
+	key : Leader(ability_title, ability_text, agenda_title, agenda_text)
+	for (key, ability_title, ability_text, agenda_title, agenda_text) in zip (name, ability_title, ability_text, agenda_title, agenda_text)
+}
+
+#Discord Help Attempt - dict comprehension
+#combined = {key : rest for (key, *rest) in zip(name, ability_title, ability_text, agenda_title, agenda_text)}
+print("\nAbility Title: \n", combined["Alexander"].ability_title)
+print("\nAbility Text: \n", combined["Alexander"].ability_text)
+print("\nAgenda Title: \n", combined["Alexander"].agenda_title)
+print("\nAgenda Text: \n", combined["Alexander"].agenda_text)
 
 #------------------------------------------------------------------------------------
 #Final - Have Seperate lists to be used in embed
