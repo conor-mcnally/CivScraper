@@ -15,6 +15,9 @@ def strip_html(list):
 		newList.append(no_tags)
 	return newList
 
+def drop(myList, k):
+	del myList[k-1::k]
+
 # get the data
 data = requests.get('https://civilization.fandom.com/wiki/Leaders_(Civ6)')
 
@@ -52,11 +55,18 @@ for td in leader:
 leader_info_text.pop(0)
 for i in leader_info_text:
 	if len(i) == 3:
-		for j in i:
-			#remove first of every three
+		newlist = [x for i, x in enumerate(i) if i%3 !=0]
+		print(newlist)
+		# for j in i:
+		# 	#remove first of every three
+		# 	newlist = [x for i, x in enumerate(j) if i%3 !=0]
+		# 	print(newlist)
+			# drop(j, 3)
+			# print(j)
 
 	elif len(i) > 3:
 		for j in i:
+			pass
 			#remove first two of every 4
 
 	else:
