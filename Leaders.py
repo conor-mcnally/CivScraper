@@ -50,8 +50,18 @@ for td in leader:
 
 #Save all agenda/ability text to lists
 leader_info_text.pop(0)
-ability_text = [i[0] for i in leader_info_text] #Seperate ability to seperate list
-agenda_text = [i[1] for i in leader_info_text]  #Seperate agenda to seperate list
+for i in leader_info_text:
+	if len(i) == 3:
+		for j in i:
+			#remove first of every three
+
+	elif len(i) > 3:
+		for j in i:
+			#remove first two of every 4
+
+	else:
+		ability_text = [i[0] for i in leader_info_text] #Seperate ability to seperate list
+		agenda_text = [i[1] for i in leader_info_text]  #Seperate agenda to seperate list
 
 #Strip html tags
 ability_text = strip_html(ability_text)
