@@ -55,20 +55,15 @@ for td in leader:
 leader_info_text.pop(0)
 for i in leader_info_text:
 	if len(i) == 3:
-		newlist = [x for i, x in enumerate(i) if i%3 !=0]
-		print(newlist)
-		# for j in i:
-		# 	#remove first of every three
-		# 	newlist = [x for i, x in enumerate(j) if i%3 !=0]
-		# 	print(newlist)
-			# drop(j, 3)
-			# print(j)
+		j = [x for i, x in enumerate(i) if i%3 !=0] # This is the right piece of code, implement somehow
+
 
 	elif len(i) > 3:
 		for j in i:
-			pass
+			#del i[:j:]
+			#print(j)
 			#remove first two of every 4
-
+			pass
 	else:
 		ability_text = [i[0] for i in leader_info_text] #Seperate ability to seperate list
 		agenda_text = [i[1] for i in leader_info_text]  #Seperate agenda to seperate list
