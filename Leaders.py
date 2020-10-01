@@ -15,9 +15,6 @@ def strip_html(list):
 		newList.append(no_tags)
 	return newList
 
-def drop(myList, k):
-	del myList[k-1::k]
-
 # get the data
 data = requests.get('https://civilization.fandom.com/wiki/Leaders_(Civ6)')
 
@@ -28,8 +25,6 @@ soup = BeautifulSoup(data.text, 'html.parser')
 list_of_leaders = soup.find('table', { 'class': 'wikitable sortable' })
 #Extract each leader row from table
 leader = list_of_leaders.find_all('tr')
-#Remove first row containing table headings
-# leader.pop(0)
 #-----------------------------------------------------------------------------------
 #leader ability/agenda titles
 leader_info_titles = []
@@ -53,24 +48,14 @@ for td in leader:
 
 #Save all agenda/ability text to lists
 leader_info_text.pop(0)
-for i in leader_info_text:
-	if len(i) == 3:
-		j = [x for i, x in enumerate(i) if i%3 !=0] # This is the right piece of code, implement somehow
-
-
-	elif len(i) > 3:
-		for j in i:
-			#del i[:j:]
-			#print(j)
-			#remove first two of every 4
-			pass
-	else:
-		ability_text = [i[0] for i in leader_info_text] #Seperate ability to seperate list
-		agenda_text = [i[1] for i in leader_info_text]  #Seperate agenda to seperate list
+ability_text = [i[-2] if len(i) > 2 else i[0] for i in leader_info_text]
+agenda_text = [i[-1] for i in leader_info_text]
 
 #Strip html tags
 ability_text = strip_html(ability_text)
 agenda_text = strip_html(agenda_text)
+
+print(agenda_text[-3])
 
 #------------------------------------------------------------------------------------
 #Leader Name
@@ -85,20 +70,14 @@ name = strip_html(name)
 
 #Remove duplicates
 name = list(dict.fromkeys(name))
-#print("Length of names list:\n", len(name))
 
 #------------------------------------------------------------------------------------
-
 # Leader Icon
 leader_icon = []
 for tr in leader:
 	for td in tr.find_all("a")[0]:
-	#Alexander entry hiding in here
 		for image in td:
-# 		#All other icons here
-		#It skips alexander as it starts with noscript tag, which he does not start with
 			leader_icon.append(image.get('src'))
-#print("Length of icons list:\n", len(leader_icon))
 leader_icon.insert(0, "https://vignette.wikia.nocookie.net/civilization/images/3/33/Alexander_%28Civ6%29.png/revision/latest/scale-to-width-down/44?cb=20180216210702")
 #------------------------------------------------------------------------------------
 
@@ -111,7 +90,7 @@ class Leader:
 	agenda_text : str
 	leader_icon : str
 
-combined = {
+leadersComb = {
 	key : Leader(ability_title, ability_text, agenda_title, agenda_text, leader_icon)
 	for (key, ability_title, ability_text, agenda_title, agenda_text, leader_icon) in zip (name, ability_title, ability_text, agenda_title, agenda_text, leader_icon)
 }
