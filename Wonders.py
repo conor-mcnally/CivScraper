@@ -8,7 +8,7 @@ from dataclasses import dataclass
 clean = re.compile('<.*?>')
 
 #Function to strip html tags from text
-def strip_html(list):
+def strip_html(*list):
 	newList = []
 	for i in list:
 		no_tags = clean.sub('', str(i))
@@ -43,18 +43,15 @@ wonder_info_text = []
 for td in wonder:
 	wonder_info_text.append(td.find_all('td'))
 
-#Save all agenda/ability text to lists
-
-description = [i[1] for i in wonder_info_text]
-size = [i[2] for i in wonder_info_text]
+description = [i[-2] for i in wonder_info_text]
+size = [i[-1] for i in wonder_info_text]
 
 #Strip html tags
 description = strip_html(description)
 size = strip_html(size)
 
-
-# #------------------------------------------------------------------------------------
-# # Wonder Icon
+#------------------------------------------------------------------------------------
+# Wonder Icon
 wonder_icon = []
 for tr in wonder:
 	for td in tr.find_all("a")[0]:
@@ -64,19 +61,19 @@ for tr in wonder:
 #------------------------------------------------------------------------------------
 #Combine Lists
 @dataclass
-class Wonder:
+class NaturalWonder:
 	description : str
 	size : str
 	wonder_icon : str
 
 combined2 = {
-	key : Wonder(description, size, wonder_icon)
+	key : NaturalWonder(description, size, wonder_icon)
 	for (key, description, size, wonder_icon) in zip (name, description, size, wonder_icon)
 }
 
 # # #Show results - Testing only
-user_input = input("Enter wonder name: ")
-print("\nDescription: \n", combined2[user_input].description)
-print("\nSize: \n", combined2[user_input].size)
+# user_input = input("Enter wonder name: ")
+# print("\nDescription: \n", combined2[user_input].description)
+# print("\nSize: \n", combined2[user_input].size)
 
 #------------------------------------------------------------------------------------
