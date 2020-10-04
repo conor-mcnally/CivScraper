@@ -24,8 +24,8 @@ soup = BeautifulSoup(data.text, 'html.parser')
 #Extract table from html
 list_of_world_wonders = soup.find('table', { 'class': 'article-table sortable' })
 #Extract each leader row from table
-wonder = list_of_world_wonders.find_all('tr')
-
+wonder = list_of_world_wonders.find_all('tr')[1:]
+header = list_of_world_wonders.find_all('tr')[0]
 #-----------------------------------------------------------------------------------
 #Wonder Name
 name = []

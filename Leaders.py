@@ -24,7 +24,9 @@ soup = BeautifulSoup(data.text, 'html.parser')
 #Extract table from html
 list_of_leaders = soup.find('table', { 'class': 'wikitable sortable' })
 #Extract each leader row from table
-leader = list_of_leaders.find_all('tr')
+leader = list_of_leaders.find_all('tr')[1:]
+headers = list_of_leaders.find_all('tr')[0].get_text()
+
 #-----------------------------------------------------------------------------------
 #leader ability/agenda titles
 leader_info_titles = []
@@ -32,14 +34,12 @@ for td in leader:
 	leader_info_titles.append(td.find_all('b'))
 
 #Save all agenda/ability titles to lists
-leader_info_titles.pop(0)
 ability_title = [i[0] for i in leader_info_titles] #Seperate ability to seperate list
 agenda_title = [i[1] for i in leader_info_titles]  #Seperate agenda to seperate list
 
 #Strip html tags
 ability_title = strip_html(ability_title)
 agenda_title = strip_html(agenda_title)
-
 #------------------------------------------------------------------------------------
 #leader ability/agenda text
 leader_info_text = []
@@ -55,12 +55,9 @@ agenda_text = [i[-1] for i in leader_info_text]
 ability_text = strip_html(ability_text)
 agenda_text = strip_html(agenda_text)
 
-print(agenda_text[-3])
-
 #------------------------------------------------------------------------------------
 #Leader Name
 name = []
-leader.pop(0)
 for tr in leader:
 	for td in tr:
 		name.append(tr.find_all('a')[1])
@@ -70,7 +67,6 @@ name = strip_html(name)
 
 #Remove duplicates
 name = list(dict.fromkeys(name))
-
 #------------------------------------------------------------------------------------
 # Leader Icon
 leader_icon = []

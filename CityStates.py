@@ -24,11 +24,11 @@ soup = BeautifulSoup(data.text, 'html.parser')
 #Extract table from html
 list_of_cs = soup.find('table', { 'class': 'article-table sortable' })
 #Extract each leader row from table
-cs = list_of_cs.find_all('tr')
+cs = list_of_cs.find_all('tr')[1:]
+cs_headers = list_of_cs.find_all('tr')[0]
 #-----------------------------------------------------------------------------------
 #Wonder Name
 name = []
-cs.pop(0)
 for tr in cs:
 	for td in tr:
 		name.append(tr.find_all('a')[1])
