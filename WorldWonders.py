@@ -29,7 +29,6 @@ header = list_of_world_wonders.find_all('tr')[0]
 #-----------------------------------------------------------------------------------
 #Wonder Name
 name = []
-wonder.pop(0)
 for tr in wonder:
 	for td in tr:
 		name.append(tr.find_all('a')[1])
@@ -55,11 +54,11 @@ bonus = []
 placement = []
 for tr in wonder:
     for td in tr:
-        era.append(tr.find_all('td')[1])
-        requirements.append(tr.find_all('td')[2])
-        production.append(tr.find_all('td')[3])
-        bonus.append(tr.find_all('td')[4])
-        placement.append(tr.find_all('td')[5])
+        era.append(tr.find_all('td')[1]).get_text()
+        requirements.append(tr.find_all('td')[2]).get_text()
+        production.append(tr.find_all('td')[3]).get_text()
+        bonus.append(tr.find_all('td')[4]).get_text()
+        placement.append(tr.find_all('td')[5]).get_text()
 
 # era = list(dict.fromkeys(era))
 era = strip_html(era)
@@ -73,7 +72,7 @@ placement = strip_html(placement)
 class WorldWonder:
 	era : str
 	requirements : str
-	#production : str
+	production : str
     bonus : str
     placement : str
     world_wonder_icon : str

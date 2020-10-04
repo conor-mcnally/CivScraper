@@ -25,7 +25,8 @@ soup = BeautifulSoup(data.text, 'html.parser')
 list_of_cs = soup.find('table', { 'class': 'article-table sortable' })
 #Extract each leader row from table
 cs = list_of_cs.find_all('tr')[1:]
-cs_headers = list_of_cs.find_all('tr')[0]
+cs_headers = list_of_cs.find_all('tr')[0].get_text()
+print(cs_headers)
 #-----------------------------------------------------------------------------------
 #Wonder Name
 name = []
@@ -37,7 +38,7 @@ for tr in cs:
 name = strip_html(name)
 #Remove duplicates
 name = list(dict.fromkeys(name))
-
+print(name)
 #------------------------------------------------------------------------------------
 # Wonder Icon
 cs_icon = []
@@ -49,7 +50,6 @@ for tr in cs:
 cs_icon.insert(0, 'https://vignette.wikia.nocookie.net/civilization/images/7/78/Akkad_%28Civ6%29.png/revision/latest/scale-to-width-down/32?cb=20190419023616')
 
 #------------------------------------------------------------------------------------
-
 #Suzerian Bonus
 cs_bonus = []
 for td in cs:
@@ -59,6 +59,7 @@ cs_bonus = [i[-1] if len(i) > 2 else i[0] for i in cs_bonus]
 
 #Strip html tags
 cs_bonus = strip_html(cs_bonus)
+print(cs_bonus)
 #------------------------------------------------------------------------------------
 #Combine Lists
 @dataclass
@@ -71,6 +72,6 @@ combined3 = {
 	for (key, cs_icon, cs_bonus) in zip (name, cs_icon, cs_bonus)
 }
 
-# # #Show results - Testing only
-user_input = input("Enter cs name: ")
-print("\nSuz Bonus: \n", combined3[user_input].cs_bonus)
+# # # #Show results - Testing only
+# user_input = input("Enter cs name: ")
+# print("\nSuz Bonus: \n", combined3[user_input].cs_bonus)
