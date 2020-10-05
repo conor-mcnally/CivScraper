@@ -26,7 +26,6 @@ list_of_cs = soup.find('table', { 'class': 'article-table sortable' })
 #Extract each leader row from table
 cs = list_of_cs.find_all('tr')[1:]
 cs_headers = list_of_cs.find_all('tr')[0].get_text()
-print(cs_headers)
 #-----------------------------------------------------------------------------------
 #Wonder Name
 name = []
@@ -38,7 +37,6 @@ for tr in cs:
 name = strip_html(name)
 #Remove duplicates
 name = list(dict.fromkeys(name))
-print(name)
 #------------------------------------------------------------------------------------
 # Wonder Icon
 cs_icon = []
@@ -59,7 +57,6 @@ cs_bonus = [i[-1] if len(i) > 2 else i[0] for i in cs_bonus]
 
 #Strip html tags
 cs_bonus = strip_html(cs_bonus)
-print(cs_bonus)
 #------------------------------------------------------------------------------------
 #Combine Lists
 @dataclass

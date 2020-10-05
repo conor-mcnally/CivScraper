@@ -3,6 +3,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
+from levenshtein import levenshtein
 
 #regex expression for html tags
 clean = re.compile('<.*?>')
@@ -91,14 +92,11 @@ leadersComb = {
 	for (key, ability_title, ability_text, agenda_title, agenda_text, leader_icon) in zip (name, ability_title, ability_text, agenda_title, agenda_text, leader_icon)
 }
 
-#Discord Help Attempt - dict comprehension
-#combined = {key : rest for (key, *rest) in zip(name, ability_title, ability_text, agenda_title, agenda_text)}
-
 #Show results - Testing only
-# user_input = input("Enter leader name: ")
-# print("\nAbility Title: \n", combined[user_input].ability_title)
-# print("\nAbility Text: \n", combined[user_input].ability_text)
-# print("\nAgenda Title: \n", combined[user_input].agenda_title)
-# print("\nAgenda Text: \n", combined[user_input].agenda_text)
+user_input = input("Enter leader name: ")
+print("\nAbility Title: \n", combined[user_input].ability_title)
+print("\nAbility Text: \n", combined[user_input].ability_text)
+print("\nAgenda Title: \n", combined[user_input].agenda_title)
+print("\nAgenda Text: \n", combined[user_input].agenda_text)
 
 #------------------------------------------------------------------------------------
