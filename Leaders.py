@@ -3,7 +3,6 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
-from levenshtein import levenshtein
 
 #regex expression for html tags
 clean = re.compile('<.*?>')
@@ -87,7 +86,7 @@ class Leader:
 	agenda_text : str
 	leader_icon : str
 
-leadersComb = {
+combined = {
 	key : Leader(ability_title, ability_text, agenda_title, agenda_text, leader_icon)
 	for (key, ability_title, ability_text, agenda_title, agenda_text, leader_icon) in zip (name, ability_title, ability_text, agenda_title, agenda_text, leader_icon)
 }

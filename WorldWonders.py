@@ -53,12 +53,11 @@ production = []
 bonus = []
 placement = []
 for tr in wonder:
-    for td in tr:
-        era.append(tr.find_all('td')[1]).get_text()
-        requirements.append(tr.find_all('td')[2]).get_text()
-        production.append(tr.find_all('td')[3]).get_text()
-        bonus.append(tr.find_all('td')[4]).get_text()
-        placement.append(tr.find_all('td')[5]).get_text()
+    era.append(tr.find_all('td')[1])
+    requirements.append(tr.find_all('td')[2])
+    production.append(tr.find_all('td')[3])
+    bonus.append(tr.find_all('td')[4])
+    placement.append(tr.find_all('td')[5])
 
 # era = list(dict.fromkeys(era))
 era = strip_html(era)
@@ -67,17 +66,20 @@ production = strip_html(production)
 bonus = strip_html(bonus)
 placement = strip_html(placement)
 
+
 #------------------------------------------------------------------------------------
 @dataclass
 class WorldWonder:
 	era : str
 	requirements : str
 	production : str
-    bonus : str
-    placement : str
-    world_wonder_icon : str
+	bonus: str
+	placement : str
+	world_wonder_icon : str
 
 combined4 = {
 	key : WorldWonder(era, requirements, production, bonus, placement, world_wonder_icon)
 	for (key, era, requirements, production, bonus, placement, world_wonder_icon) in zip (name, era, requirements, production, bonus, placement, world_wonder_icon)
 }
+
+print(requirements, end = " ")
