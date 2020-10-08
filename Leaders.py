@@ -47,7 +47,6 @@ for td in leader:
 	leader_info_text.append(td.find_all('p'))
 
 #Save all agenda/ability text to lists
-leader_info_text.pop(0)
 ability_text = [i[-2] if len(i) > 2 else i[0] for i in leader_info_text]
 agenda_text = [i[-1] for i in leader_info_text]
 
@@ -92,10 +91,10 @@ combined = {
 }
 
 #Show results - Testing only
-user_input = input("Enter leader name: ")
-print("\nAbility Title: \n", combined[user_input].ability_title)
-print("\nAbility Text: \n", combined[user_input].ability_text)
-print("\nAgenda Title: \n", combined[user_input].agenda_title)
-print("\nAgenda Text: \n", combined[user_input].agenda_text)
+# user_input = input("Enter leader name: ")
+# print("\nAbility Title: \n", combined[user_input].ability_title)
+# print("\nAbility Text: \n", combined[user_input].ability_text)
+# print("\nAgenda Title: \n", combined[user_input].agenda_title)
+# print("\nAgenda Text: \n", combined[user_input].agenda_text)
 
 #------------------------------------------------------------------------------------

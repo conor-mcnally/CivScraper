@@ -30,14 +30,10 @@ header = list_of_world_wonders.find_all('tr')[0]
 #Wonder Name
 name = []
 for tr in wonder:
-	for td in tr:
-		name.append(tr.find_all('a')[1])
+	name.append(tr.find_all('a')[1])
 
 #Strip html tags
 name = strip_html(name)
-#Remove duplicates
-name = list(dict.fromkeys(name))
-
 #------------------------------------------------------------------------------------
 # Wonder Icon
 world_wonder_icon = []
